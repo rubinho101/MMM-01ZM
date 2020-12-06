@@ -1,6 +1,8 @@
 
 #!/usr/bin/env python3
 
+#python3 function based on mitemp and sanic
+#set up a sanic server, read the mac adress from xiaomi 01ZM sensors and return the values as json to MMM
 
 from btlewrap import available_backends, BluepyBackend, GatttoolBackend, PygattBackend
 from mitemp_bt.mitemp_bt_poller import MiTempBtPoller, \
@@ -9,7 +11,6 @@ from datetime import datetime
 from time import sleep
 from sanic import Sanic
 from sanic.response import json
-#from urllib.parse import urlparse
 
 now = datetime.now()
 
@@ -18,12 +19,9 @@ backend = BluepyBackend
 app = Sanic()
 @app.route('/')
 async def poll(request):
-    """Get the Sensor MAC as defined in the javascript file and poll data from the sensor once its invoked"""
+    """Get the Sensor MAC as defined in the node_helper.js file, parse data from the sensor and return it as json to MMM"""
     mac = request.args.get('mac', 0)
     poller = MiTempBtPoller(mac, backend)
-    #query = urlparse(self.path).query
-    #query_mac = dict(qc.split("=") for qc in query.split("&"))
-    #mac_test = query_mac("mac")
     print("Parsing data")
     print("FW: {}".format(poller.firmware_version()))
     print("Name: {}".format(poller.name()))
@@ -34,12 +32,12 @@ async def poll(request):
         myfile.write("Time: {}; Battery: {}; Temp: {}; Humidity: {} /".format(datetime.now(), poller.parameter_value(MI_BATTERY), poller.parameter_value(MI_TEMPERATURE), \
         poller.parameter_value(MI_HUMIDITY)))
     return json({'Temperature': poller.parameter_value(MI_TEMPERATURE), 'Humidity': poller.parameter_value(MI_HUMIDITY), 'Mac': mac})
-        #sleep(10)
+
 
 
 
 print("datetime =", dt_string)
 
-
+#run the server
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port = 8000)
