@@ -8,7 +8,9 @@ In */home/pi/MagicMirror/modules* create a new folder MMM-01ZM `git clone https:
 `pip3 install bluepy`\
 `pip3 install btlewrap`\
 `git clone https://github.com/hassiweb/mitemp`\
-Move the parseBLE01ZM.py file into the mitemp folder
+Move the parseBLE01ZM.py file into the mitemp folder.
+
+In */home/pi/MagicMirror/modules/MMM-01ZM/mitemp/mitemp_bt/mitemp_bt_poller.py* line 34 change `self._bt_interface = BluetoothInterface(backend, adapter)` to `self._bt_interface = BluetoothInterface(backend, adapter=adapter)`.
 
 In addition, *parseBLE01ZM.py* needs Sanic the Python3 web server framework to interact with MMM:\
 `pip3 install sanic`
@@ -27,8 +29,10 @@ Finally, add MMM-01ZM to the *config.js* file:
 		},
 ```
 
+Before you start MMM run *parseBLE01ZM.py*.
+
 Please be aware of the setInterval and setTimeout values in the *MMM-01ZM.js* and *node_helper.js* files.
 This needs to be balanced based on the number of sensors you parse to avoid sending too many requests to the Raspi BLE component.
 
-
+Hint: It takes about 45 seconds for the first two sensors to be displayed.
 

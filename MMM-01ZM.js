@@ -12,7 +12,7 @@ Module.register("MMM-01ZM", {
       element.className = "myContent"
       var html = ""
       for (i = 0; i < this.results.length; i++)
-        html = html + "Room "+(i+1)+": " + this.results[i].Temperature + " °C " + this.results[i].Humidity + " % " + "<br>"
+        html = html + "Room "+(i+1)+": " + "Temperature " + this.results[i].Temperature + " °C, " + "Humidity " + this.results[i].Humidity + " % " + "<br>"
       element.innerHTML = html
       return element
     },
