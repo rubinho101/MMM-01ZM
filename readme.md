@@ -1,6 +1,6 @@
 # MMM-01ZM
 
-Since I got a couple of Xiaomi LYWSDCGQ 01ZM Temperature and Humidity sensors and I want to display the values on the MMM [MagicMirror2](https://magicmirror.builders/) without using the Gateway approach, so I created this MMM-01ZM module.
+Since I got a couple of Xiaomi LYWSDCGQ 01ZM Temperature and Humidity sensors and I want to display the values on the MMM [MagicMirror2](https://magicmirror.builders/) without using the Gateway approach, I created this MMM-01ZM module.
 
 This module requires the [mitemp_bt](https://github.com/hassiweb/mitemp999) library:\
 In */home/pi/MagicMirror/modules* create a new folder MMM-01ZM `git clone https://github.com/rubinho101/MMM-01ZM`\
@@ -8,7 +8,7 @@ In */home/pi/MagicMirror/modules* create a new folder MMM-01ZM `git clone https:
 `pip3 install bluepy`\
 `pip3 install btlewrap`\
 `git clone https://github.com/hassiweb/mitemp`\
-Move the parseBLE01ZM.py file into the mitemp folder.
+Move the *parseBLE01ZM.py* file into the mitemp folder.
 
 In */home/pi/MagicMirror/modules/MMM-01ZM/mitemp/mitemp_bt/mitemp_bt_poller.py* line 34 change `self._bt_interface = BluetoothInterface(backend, adapter)` to `self._bt_interface = BluetoothInterface(backend, adapter=adapter)`.
 
