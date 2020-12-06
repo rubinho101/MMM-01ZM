@@ -1,64 +1,38 @@
-var getJSON = require('get-json');
-
- 
-function roomOne() {
-    getJSON('http://localhost:8000/?mac=58:2d:34:35:ad:00', 
-    function(error, response) {
-	    console.log(error);
-        console.log(response);
-        console.log("Room 1");
-    }
-);    
-}
-
-function roomTwo() {
-    getJSON('http://localhost:8000/?mac=58:2d:34:35:ad:00', 
-    function(error, response) {
-	    console.log(error);
-        console.log(response);
-        console.log("Room 2");
-    }
-);    
-}
-
-function roomThree() {
-    getJSON('http://localhost:8000/?mac=58:2d:34:35:ad:00', 
-    function(error, response) {
-	    console.log(error);
-        console.log(response);
-        console.log("Room 3");
-    }
-);    
-}
-
-function roomParse() {
-setTimeout(roomOne, 1);
-setTimeout(roomTwo, 10000);
-setTimeout(roomThree, 20000);
-}
-
-roomParse()
-
-
 Module.register("MMM-01ZM", {
     defaults: {},
       start: function (){
-        this.temperatur = ""
+        this.results = []
         var timer = setInterval(()=>{
           this.updateDom()
-        }, 10000) 
-        setInterval(roomParse, 60000)
+        }, 20000)
       },
       getDom: function() {
         var element = document.createElement("div")
         element.className = "myContent"
-        element.innerHTML = "Temperature " + this.temperatur
-        //var subElement = document.createElement("p")
-        //subElement.id = "COUNT"
-        //element.appendChild(subElement)
+        var html = ""
+        for (i = 0; i < this.results.length; i++)
+          html = html + "Room "+(i+1)+": " + this.results[i].Temperature + " C " + this.results[i].Humidity + " % " + "<br>"
+        element.innerHTML = html
         return element
       },
       
-  notificationReceived: function() {},
-  socketNotificationReceived: function() {},
+      notificationReceived: function(notification, payload, sender) {
+        switch(notification) {
+          case "DOM_OBJECTS_CREATED":
+            var timer = setInterval(()=>{
+              this.sendSocketNotification("DO_YOUR_JOB")
+            }, 20000)
+            break
+        }
+      },
+      
+      socketNotificationReceived: function(notification, payload) {
+        switch(notification) {
+          case "I_DID":
+            console.log(payload)
+            this.results = payload
+            console.log(this.results)
+            break
+        }
+      },
   })
