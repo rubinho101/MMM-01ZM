@@ -2,6 +2,8 @@
 
 Since I got a couple of Xiaomi LYWSDCGQ 01ZM Temperature and Humidity sensors and I want to display the values on the MMM [MagicMirror2](https://magicmirror.builders/) without using the Gateway approach, I created this MMM-01ZM module.
 
+![alt text](img/MMM-01ZM.png "ScreenShot")
+
 This module requires the [mitemp_bt](https://github.com/hassiweb/mitemp) library:\
 In */home/pi/MagicMirror/modules* create a new folder MMM-01ZM `git clone https://github.com/rubinho101/MMM-01ZM`\
 `cd /home/pi/MagicMirror/modules/MMM-01ZM`\
