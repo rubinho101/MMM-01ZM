@@ -4,24 +4,36 @@ Since I got a couple of Xiaomi LYWSDCGQ 01ZM Temperature and Humidity sensors an
 
 ![alt text](img/MMM-01ZM.png "ScreenShot")
 
-This module requires the [mitemp_bt](https://github.com/hassiweb/mitemp) library:\
-In */home/pi/MagicMirror/modules* create a new folder MMM-01ZM `git clone https://github.com/rubinho101/MMM-01ZM`\
-`cd /home/pi/MagicMirror/modules/MMM-01ZM`\
+## Installation
+
+In */home/pi/MagicMirror/modules* create a new folder MMM-01ZM with `git clone https://github.com/rubinho101/MMM-01ZM`\
+
+### Easy installation
+
+Go to the */modules/MMM-01ZM* folder `cd /home/pi/MagicMirror/modules/MMM-01ZM`.\
+Make the postinstaller.sh executable `chmod +x /home/pi/MMM-01ZM/img/postinstaller.sh`.\
+In the */modules/MMM-01ZM* folder `npm install` to install the dependencies and libraries.\
+
+### Manual installation of dependencies and libraries
+
+This module requires the [mitemp_bt](https://github.com/hassiweb/mitemp) library.\
+Go to the */modules/MMM-01ZM* folder `cd /home/pi/MagicMirror/modules/MMM-01ZM`\
 `pip3 install bluepy`\
 `pip3 install btlewrap`\
 `git clone https://github.com/hassiweb/mitemp`\
-Move the *parseBLE01ZM.py* file into the mitemp folder.
+Move the *parseBLE01ZM.py* file into the */MMM-01ZM/mitemp* folder.\
+In */home/pi/MagicMirror/modules/MMM-01ZM/mitemp/mitemp_bt/mitemp_bt_poller.py* line 34 change the second argument `self._bt_interface = BluetoothInterface(backend, adapter)` to `self._bt_interface = BluetoothInterface(backend, adapter=adapter)`.
 
-In */home/pi/MagicMirror/modules/MMM-01ZM/mitemp/mitemp_bt/mitemp_bt_poller.py* line 34 change `self._bt_interface = BluetoothInterface(backend, adapter)` to `self._bt_interface = BluetoothInterface(backend, adapter=adapter)`.
-
-In addition, *parseBLE01ZM.py* needs Sanic the Python3 web server framework to interact with MMM:\
+In addition, *parseBLE01ZM.py* needs [Sanic](https://sanic.readthedocs.io/en/latest/) the Python3 web server framework to interact with MMM:\
 `pip3 install sanic`
 
-The node_helper.js requires get-json library:\
+The node_helper.js requires [get-json](https://www.npmjs.com/package/get-json) library:\
 `npm install get-json`
 
-Next, add the MAC addresses of your 01ZM sensors to the node_helper.js array:\
-`const rooms = ["your sensor mac 1", "your sensor mac 2", "your sensor mac 3"]`
+### Final steps
+
+Next, add the MAC addresses of your sensors to the node_helper.js array:\
+`const rooms = ["your sensor mac", "your sensor mac", "your sensor mac"]`
 
 Finally, add MMM-01ZM to the *config.js* file:
 ```
@@ -31,7 +43,7 @@ Finally, add MMM-01ZM to the *config.js* file:
 		},
 ```
 
-Before you start MMM run *parseBLE01ZM.py*.
+Before you start MMM run *parseBLE01ZM.py* in *MMM-01ZM/mitemp*.\
 
 Please be aware of the setInterval and setTimeout values in the *MMM-01ZM.js* and *node_helper.js* files.
 This needs to be balanced based on the number of sensors you parse to avoid sending too many requests to the Raspi BLE component.
