@@ -1,0 +1,29 @@
+{
+  "name": "mmm-01zm",
+  "version": "0.0.5",
+  "description": "Read and display values from a Xiaomi 01ZM temperature and humidity sensor",
+  "main": "MMM-01ZM.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "img/postinstaller.sh"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rubinho101/MMM-01ZM.git"
+  },
+  "keywords": [
+    "magicmirror",
+    "xiaomi",
+    "temperature",
+    "humidity"
+  ],
+  "author": "rubinho101",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rubinho101/MMM-01ZM/issues"
+  },
+  "homepage": "https://github.com/rubinho101/MMM-01ZM#readme",
+  "dependencies": {
+    "get-json": "^1.0.1"
+  }
+}
