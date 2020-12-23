@@ -1,7 +1,7 @@
 {
   "name": "mmm-01zm",
   "version": "0.0.5",
-  "description": "Read and display values from a Xiaomi 01ZM temperature and humidity sensor",
+  "description": "Read and display values from a Xiaomi 01ZM temperature and humidity sensor; in addition, you may use a nova sds011 pm sensor and correct the pm data with a correction parameter",
   "main": "MMM-01ZM.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -15,7 +15,10 @@
     "magicmirror",
     "xiaomi",
     "temperature",
-    "humidity"
+    "humidity",
+    "PM2.5",
+    "PM10",
+    "SDS011"
   ],
   "author": "rubinho101",
   "license": "MIT",

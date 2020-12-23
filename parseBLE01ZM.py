@@ -11,6 +11,7 @@ from datetime import datetime
 from time import sleep
 from sanic import Sanic
 from sanic.response import json
+#from airquality import *
 
 now = datetime.now()
 
@@ -28,11 +29,20 @@ async def poll(request):
     print("Battery: {}".format(poller.parameter_value(MI_BATTERY)))
     print("Temperature: {}".format(poller.parameter_value(MI_TEMPERATURE)))
     print("Humidity: {}".format(poller.parameter_value(MI_HUMIDITY)))
+    x_humidity = poller.parameter_value(MI_HUMIDITY)
+    print(x_humidity)
     with open('/home/pi/file.txt', 'a') as myfile:
         myfile.write("Time: {}; Battery: {}; Temp: {}; Humidity: {} /".format(datetime.now(), poller.parameter_value(MI_BATTERY), poller.parameter_value(MI_TEMPERATURE), \
         poller.parameter_value(MI_HUMIDITY)))
     return json({'Temperature': poller.parameter_value(MI_TEMPERATURE), 'Humidity': poller.parameter_value(MI_HUMIDITY), 'Mac': mac})
 
+#@app.route('/pmdata')
+#async def get_pm(request):
+#    """calling sds011 pm data and returning as json to route /pmdata"""
+#    print("parsing PM data")
+#    pmt_2_5, pmt_10 = get_data()
+#    print(pmt_2_5, pmt_10)
+#    return json({'PM25':pmt_2_5, 'PM10': pmt_10})
 
 
 

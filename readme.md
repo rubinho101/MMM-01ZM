@@ -1,10 +1,11 @@
 # MMM-01ZM
 
-Since I got a couple of Xiaomi LYWSDCGQ 01ZM Temperature and Humidity sensors and I want to display the values on the MMM [MagicMirror2](https://magicmirror.builders/) without using the Gateway approach, I created this MMM-01ZM module.
+Since I got a couple of Xiaomi LYWSDCGQ 01ZM Temperature-Humidity AND Nova PM SDS011 sensors and I want to display the values on the MMM [MagicMirror2](https://magicmirror.builders/) 
+without using the Gateway approach, I created this MMM-01ZM module.
 
 ![alt text](img/MMM-01ZM.png "ScreenShot")
 
-## Installation
+## Installation of 01ZM Temp&Humidity Sensor
 
 In */home/pi/MagicMirror/modules* create a new folder MMM-01ZM with `git clone https://github.com/rubinho101/MMM-01ZM`\
 
@@ -12,7 +13,7 @@ In */home/pi/MagicMirror/modules* create a new folder MMM-01ZM with `git clone h
 
 Go to the */modules/MMM-01ZM* folder `cd /home/pi/MagicMirror/modules/MMM-01ZM`.\
 Make the postinstaller.sh executable `chmod +x /home/pi/MMM-01ZM/img/postinstaller.sh`.\
-In the */modules/MMM-01ZM* folder `npm install` to install the dependencies and libraries.\
+In the */modules/MMM-01ZM* folder `npm install` to install the dependencies and libraries.
 
 ### Manual installation of dependencies and libraries
 
@@ -43,10 +44,24 @@ Finally, add MMM-01ZM to the *config.js* file:
 		},
 ```
 
-Before you start MMM run *parseBLE01ZM.py* in *MMM-01ZM/mitemp*.\
+Before you start MMM run *parseBLE01ZM.py* in *MMM-01ZM/mitemp*.
 
 Please be aware of the setInterval and setTimeout values in the *MMM-01ZM.js* and *node_helper.js* files.
 This needs to be balanced based on the number of sensors you parse to avoid sending too many requests to the Raspi BLE component.
 
 Hint: It takes about 45 seconds for the first two sensors to be displayed.
+
+
+### Installation of Nova PM Sensor SDS011
+
+Note: Only valid for Nova PM Sensor SDS011 to display Air Quality.
+
+Move *airquality.py* into the *./mitemp* folder\
+Go to the */modules/MMM-01ZM/mitemp* folder `cd /home/pi/MagicMirror/modules/MMM-01ZM/mitemp`\
+Get *sds011.py* into *mitemp* folder `git clone https://github.com/ikalchev/py-sds011/blob/master/sds011/__init__.py` and rename the file to sds011.py\
+Uncomment the `@app.route('/pmdata')` and `following async def get_pm()` function in *parseBLE01ZM.py*
+
+Hint: The SDS011 air quality sensor data is being corrected by `pmCor(Humidity)` if the humidty is > 38 in *MMM-01ZM.js*. 
+The parameter k, which is the degree of hygroscopicity of a particle, is set to 0.5.
+
 
