@@ -12,7 +12,7 @@ In */home/pi/MagicMirror/modules* create a new folder MMM-01ZM with `git clone h
 ### Easy installation
 
 Go to the */modules/MMM-01ZM* folder `cd /home/pi/MagicMirror/modules/MMM-01ZM`.\
-Make the postinstaller.sh executable `chmod +x /home/pi/MMM-01ZM/img/postinstaller.sh`.\
+Make the postinstaller.sh executable `chmod +x /home/pi/MagicMirror/modules/MMM-01ZM/img/postinstaller.sh`.\
 In the */modules/MMM-01ZM* folder `npm install` to install the dependencies and libraries.
 
 ### Manual installation of dependencies and libraries
