@@ -1,6 +1,6 @@
 # MMM-01ZM
 
-Since I got a couple of Xiaomi LYWSDCGQ 01ZM Temperature-Humidity AND Nova PM SDS011 sensors and I want to display the values on the MMM [MagicMirror2](https://magicmirror.builders/) 
+Since I got a couple of Xiaomi LYWSDCGQ 01ZM Temperature-Humidity AND Nova PM SDS011 sensors and I want to display the values on the MMM [MagicMirror²](https://magicmirror.builders/) 
 without using the Gateway approach, I created this MMM-01ZM module.
 
 ![alt text](img/MMM-01ZM.png "ScreenShot")
